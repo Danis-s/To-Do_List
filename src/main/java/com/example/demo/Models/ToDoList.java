@@ -1,10 +1,10 @@
 package com.example.demo.Models;
 
-public class List {
+public class ToDoList {
     private long id;
     private String name;
 
-    public List(long id, String name) {
+    public ToDoList(long id, String name) {
         this.id = id;
         this.name = name;
     }
