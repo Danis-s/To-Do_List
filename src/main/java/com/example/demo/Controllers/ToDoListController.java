@@ -2,11 +2,9 @@ package com.example.demo.Controllers;
 
 import com.example.demo.Models.ToDoList;
 import com.example.demo.Services.ToDoListService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -17,13 +15,21 @@ public class ToDoListController {
         this.listService = listService;
     }
 
-    @GetMapping("/List")
-    public List<List> getLists(){
+    @GetMapping("/list")
+    public List<ToDoList> getLists(){
         return listService.getLists();
     }
+    @GetMapping("/list/{id}")
+    public ToDoList getListById(@PathVariable long id){
+        return listService.getList(id);
+    }
 
-    @PostMapping("/list/create")
-    public long createBook(@RequestBody ToDoList ToDoListDto) {
-        return ToDoListService.createList(ToDoListDto);
+    @PostMapping("/list")
+    public long createBook(@RequestBody ToDoList toDoListDto) {
+        return listService.createList(toDoListDto);
+    }
+    @PutMapping("/list/{id}")
+    public ToDoList editList(@RequestBody ToDoList toDoList, @PathVariable long id){
+        return listService.editList(toDoList, id);
     }
 }

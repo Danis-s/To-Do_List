@@ -1,18 +1,8 @@
-package com.example.demo.Models;
+package com.example.demo.Dto;
 
-public class ToDoList {
+public class ToDoListDto {
     private long id;
     private String name;
-    private Task task;
-
-    public ToDoList(long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public ToDoList() {
-
-    }
 
     public long getId() {
         return id;
