@@ -11,7 +11,7 @@ import java.util.Objects;
 
 @Service
 public class ToDoListService {
-    private ToDoListRepo toDoListRepo;
+    public final ToDoListRepo toDoListRepo;
 
     public ToDoListService(ToDoListRepo toDoListRepo) {
         this.toDoListRepo = toDoListRepo;
@@ -49,5 +49,14 @@ public class ToDoListService {
             }
         }
         return null;
+    }
+
+    public long deleteList(long id) {
+        for (ToDoList item: lists){
+            if(item.getId() == id) {
+                lists.remove(item);
+            }
+        }
+        return id;
     }
 }
