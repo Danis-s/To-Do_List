@@ -51,12 +51,12 @@ public class ToDoListService {
         return null;
     }
 
-    public long deleteList(long id) {
+    public ToDoList deleteList(long id) {
         for (ToDoList item: lists){
             if(item.getId() == id) {
                 lists.remove(item);
             }
         }
-        return id;
+        return null;
     }
 }

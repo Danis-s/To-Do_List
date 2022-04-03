@@ -34,7 +34,7 @@ public class ToDoListController {
     }
 
     @DeleteMapping("/list/{id}")
-    public long deleteList(@PathVariable long id){
+    public ToDoList deleteList(@PathVariable long id){
         return listService.deleteList(id);
     }
 }
