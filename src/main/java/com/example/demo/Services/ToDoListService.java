@@ -2,7 +2,6 @@ package com.example.demo.Services;
 
 import com.example.demo.Dto.ToDoListDto;
 import com.example.demo.Entities.ToDoListEntity;
-import com.example.demo.Models.ToDoList;
 import com.example.demo.Repo.ToDoListRepo;
 import org.springframework.stereotype.Service;
 
