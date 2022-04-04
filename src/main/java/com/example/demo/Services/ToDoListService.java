@@ -1,5 +1,6 @@
 package com.example.demo.Services;
 
+import com.example.demo.Dto.ToDoListDto;
 import com.example.demo.Entities.ToDoListEntity;
 import com.example.demo.Models.ToDoList;
 import com.example.demo.Repo.ToDoListRepo;
@@ -17,22 +18,22 @@ public class ToDoListService {
         this.toDoListRepo = toDoListRepo;
     }
 
-    public final List<ToDoList> lists = new ArrayList<>();
+    public final List<ToDoListDto> lists = new ArrayList<>();
 
-    public Long createList(ToDoList toDoListDto) {
+    public Long createList(ToDoListDto toDoListDto) {
         ToDoListEntity toDoListEntity = new ToDoListEntity();
-        toDoListEntity.setId(toDoListDto.getId());
         toDoListEntity.setName(toDoListDto.getName());
         lists.add(toDoListDto);
+        this.toDoListRepo.save(toDoListEntity);
         return toDoListEntity.getId();
     }
 
-    public List<ToDoList> getLists(){
+    public List<ToDoListDto> getLists(){
         return lists;
     }
 
-    public ToDoList getList(long id){
-        for (ToDoList toDoList: lists){
+    public ToDoListDto getList(long id){
+        for (ToDoListDto toDoList: lists){
             if (toDoList.getId() == id){
                 return toDoList;
             }
@@ -40,8 +41,8 @@ public class ToDoListService {
         return null;
     }
 
-    public ToDoList editList(ToDoList toDoList, long id) {
-        for (ToDoList toDoList1: lists){
+    public ToDoListDto editList(ToDoListDto toDoList, long id) {
+        for (ToDoListDto toDoList1: lists){
             if (toDoList1.getId() == id){
                 if (!Objects.equals(toDoList.getName(), null)){
                     toDoList1.setName(toDoList.getName());
@@ -51,8 +52,8 @@ public class ToDoListService {
         return null;
     }
 
-    public ToDoList deleteList(long id) {
-        for (ToDoList item: lists){
+    public ToDoListDto deleteList(long id) {
+        for (ToDoListDto item: lists){
             if(item.getId() == id) {
                 lists.remove(item);
             }

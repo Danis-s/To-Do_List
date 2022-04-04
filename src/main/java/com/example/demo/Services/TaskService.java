@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class TaskService {
-    public static long createTask(Long id, Task taskDto) {
+    public static <TaskDto> long createTask(Long id, TaskDto taskDto) {
         return 0;
     }
 }

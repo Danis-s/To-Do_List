@@ -1,5 +1,6 @@
 package com.example.demo.Controllers;
 
+import com.example.demo.Dto.TaskDto;
 import com.example.demo.Models.Task;
 import com.example.demo.Services.TaskService;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,8 +15,8 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    @PostMapping("/list/{id}/createTask")
-    public long createBook(@PathVariable Long id, @RequestBody Task TaskDto) {
+    @PostMapping("/list/{id}/task")
+    public long createTask(@PathVariable Long id, @RequestBody TaskDto TaskDto) {
         return TaskService.createTask(id, TaskDto);
     }
 }

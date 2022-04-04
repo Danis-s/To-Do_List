@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public class ToDoListRepo implements CrudRepository<ToDoListEntity, Long> {
+public interface ToDoListRepo extends CrudRepository<ToDoListEntity, Long> {
     @Override
     public <S extends ToDoListEntity> S save(S entity) {
         return null;
