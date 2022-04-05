@@ -1,5 +1,6 @@
 package com.example.demo.Controllers;
 
+import com.example.demo.Dto.TaskDto;
 import com.example.demo.Dto.ToDoListDto;
 import com.example.demo.Entities.ToDoListEntity;
 import com.example.demo.Services.ToDoListService;
@@ -27,6 +28,10 @@ public class ToDoListController {
     @PostMapping("/list")
     public long createList(@RequestBody ToDoListDto toDoListDto) {
         return listService.createList(toDoListDto);
+    }
+    @PostMapping("/list/{id}/task")
+    public ToDoListEntity addTask(@RequestBody TaskDto taskDto, @PathVariable long id){
+        return listService.addTask(id, taskDto);
     }
 
     @PutMapping("/list/{id}")

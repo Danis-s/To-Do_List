@@ -1,12 +1,14 @@
 package com.example.demo.Dto;
 
+import com.example.demo.Entities.TaskEntity;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ToDoListDto {
     private long id;
     private String name;
-    public List<TaskDto> tasks = new ArrayList<>();
+    public List<TaskEntity> tasks = new ArrayList<>();
 
     public long getId() {
         return id;
@@ -22,5 +24,13 @@ public class ToDoListDto {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<TaskEntity> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<TaskEntity> tasks) {
+        this.tasks = tasks;
     }
 }

@@ -16,10 +16,6 @@ public class TaskEntity {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getTitle() {
         return title;
     }
@@ -28,11 +24,11 @@ public class TaskEntity {
         this.title = title;
     }
 
-    public String getDescription() {
+    public String getContent() {
         return content;
     }
 
-    public void setDescription(String description) {
-        this.content = description;
+    public void setContent(String content) {
+        this.content = content;
     }
 }

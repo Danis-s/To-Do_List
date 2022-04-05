@@ -10,12 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TaskController {
     public final TaskService taskService;
+
     public TaskController(TaskService taskService){
         this.taskService = taskService;
     }
 
-    @PostMapping("/list{id}/task")
-    public long createTask(@PathVariable Long id, @RequestBody TaskDto taskDto) {
-        return taskService.createTask(id, taskDto);
-    }
+//    @PostMapping("/list{id}/task")
+//    public long createTask(@PathVariable Long id, @RequestBody TaskDto taskDto) {
+//        return taskService.createTask(id, taskDto);
+//    }
 }

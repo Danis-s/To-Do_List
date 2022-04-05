@@ -1,8 +1,8 @@
 package com.example.demo.Entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import com.example.demo.Dto.TaskDto;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class ToDoListEntity {
@@ -10,6 +10,14 @@ public class ToDoListEntity {
     @GeneratedValue
     private Long id;
     private String name;
+
+    @ManyToOne
+    @JoinColumn(name = "task_entity_id")
+    private TaskEntity taskEntity;
+
+    public TaskEntity getTaskEntity() {
+        return taskEntity;
+    }
 
     public Long getId() {
         return id;
@@ -25,5 +33,9 @@ public class ToDoListEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setTaskEntity(TaskEntity taskEntity) {
+        this.taskEntity = taskEntity;
     }
 }

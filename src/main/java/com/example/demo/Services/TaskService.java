@@ -24,7 +24,7 @@ public class TaskService {
     public Long createTask(Long id,TaskDto taskDto) {
         TaskEntity taskEntity = new TaskEntity();
         taskEntity.setTitle(taskDto.getTitle());
-        taskEntity.setDescription(taskDto.getDescription());
+        taskEntity.setContent(taskDto.getContent());
         this.taskRepo.save(taskEntity);
         return taskEntity.getId();
     }

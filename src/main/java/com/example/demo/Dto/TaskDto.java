@@ -1,17 +1,8 @@
 package com.example.demo.Dto;
 
 public class TaskDto {
-    private long id;
     private String title;
-    private String description;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
+    private String content;
 
     public String getTitle() {
         return title;
@@ -20,11 +11,10 @@ public class TaskDto {
         this.title = title;
     }
 
-    public String getDescription() {
-        return description;
+    public String getContent() {
+        return content;
     }
-
-    public void setDescription(String description) {
-        this.description = description;
+    public void setContent(String content) {
+        this.content = content;
     }
 }
