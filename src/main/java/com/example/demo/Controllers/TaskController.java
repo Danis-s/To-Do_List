@@ -1,7 +1,6 @@
 package com.example.demo.Controllers;
 
 import com.example.demo.Dto.TaskDto;
-import com.example.demo.Models.Task;
 import com.example.demo.Services.TaskService;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;

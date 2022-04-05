@@ -7,7 +7,16 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ToDoListRepo extends CrudRepository<ToDoListEntity, Long> {
+
     @Override
     Iterable<ToDoListEntity> findAll();
 
+    @Override
+    Iterable<ToDoListEntity> findAllById(Iterable<Long> id);
+
+    @Override
+    void deleteById(Long aLong);
+
+    @Override
+    void deleteAll();
 }

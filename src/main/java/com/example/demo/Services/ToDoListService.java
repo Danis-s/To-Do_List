@@ -4,11 +4,8 @@ import com.example.demo.Dto.ToDoListDto;
 import com.example.demo.Entities.ToDoListEntity;
 import com.example.demo.Repo.ToDoListRepo;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class ToDoListService {
@@ -18,47 +15,37 @@ public class ToDoListService {
         this.toDoListRepo = toDoListRepo;
     }
 
-    public final List<ToDoListDto> lists = new ArrayList<>();
 
     @Transactional
     public Long createList(ToDoListDto toDoListDto) {
         ToDoListEntity toDoListEntity = new ToDoListEntity();
         toDoListEntity.setName(toDoListDto.getName());
-        lists.add(toDoListDto);
         this.toDoListRepo.save(toDoListEntity);
         return toDoListEntity.getId();
     }
 
-    public List<ToDoListDto> getLists(){
-        return lists;
+    public List<ToDoListEntity> getLists(){
+        return (List<ToDoListEntity>) toDoListRepo.findAll();
     }
 
-    public ToDoListDto getList(long id){
-        for (ToDoListDto toDoList: lists){
-            if (toDoList.getId() == id){
-                return toDoList;
-            }
-        }
+    public ToDoListEntity getList(long id){
+        return toDoListRepo.findById(id).get();
+    }
+
+    public ToDoListEntity editList(ToDoListDto toDoList, long id) {
+        ToDoListEntity toDoListEntity = toDoListRepo.findById(id).get();
+        toDoListEntity.setName(toDoList.getName());
+        this.toDoListRepo.save(toDoListEntity);
         return null;
     }
 
-    public ToDoListDto editList(ToDoListDto toDoList, long id) {
-        for (ToDoListDto toDoList1: lists){
-            if (toDoList1.getId() == id){
-                if (!Objects.equals(toDoList.getName(), null)){
-                    toDoList1.setName(toDoList.getName());
-                }
-            }
-        }
+    public ToDoListEntity deleteList(long id) {
+        toDoListRepo.deleteById(id);
         return null;
     }
 
-    public ToDoListDto deleteList(long id) {
-        for (ToDoListDto item: lists){
-            if(item.getId() == id) {
-                lists.remove(item);
-            }
-        }
+    public ToDoListEntity deleteListsAll(){
+        toDoListRepo.deleteAll();
         return null;
     }
 }

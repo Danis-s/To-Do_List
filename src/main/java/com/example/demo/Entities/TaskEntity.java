@@ -10,7 +10,7 @@ public class TaskEntity {
     @GeneratedValue
     private Long id;
     private String title;
-    private String description;
+    private String content;
 
     public Long getId() {
         return id;
@@ -29,10 +29,10 @@ public class TaskEntity {
     }
 
     public String getDescription() {
-        return description;
+        return content;
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.content = description;
     }
 }
