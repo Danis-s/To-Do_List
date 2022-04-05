@@ -15,8 +15,8 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    @PostMapping("/list/{id}/task")
-    public long createTask(@PathVariable Long id, @RequestBody TaskDto TaskDto) {
-        return TaskService.createTask(id, TaskDto);
+    @PostMapping("/list{id}/task")
+    public long createTask(@PathVariable Long id, @RequestBody TaskDto taskDto) {
+        return taskService.createTask(id, taskDto);
     }
 }

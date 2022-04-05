@@ -6,7 +6,7 @@ services:
     image: sameersbn/postgresql:10-2
     environment:
       - PG_TRUST_LOCALNET=true
-      - DB_NAME=library
+      - DB_NAME=todo
       - DB_USER=postgres
       - DB_PASS=postgres
       - PG_RUNDIR=/run/postgres

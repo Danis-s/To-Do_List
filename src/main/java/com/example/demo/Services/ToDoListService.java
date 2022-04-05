@@ -5,13 +5,14 @@ import com.example.demo.Entities.ToDoListEntity;
 import com.example.demo.Repo.ToDoListRepo;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Service
 public class ToDoListService {
-    public final ToDoListRepo toDoListRepo;
+    private final ToDoListRepo toDoListRepo;
 
     public ToDoListService(ToDoListRepo toDoListRepo) {
         this.toDoListRepo = toDoListRepo;
@@ -19,6 +20,7 @@ public class ToDoListService {
 
     public final List<ToDoListDto> lists = new ArrayList<>();
 
+    @Transactional
     public Long createList(ToDoListDto toDoListDto) {
         ToDoListEntity toDoListEntity = new ToDoListEntity();
         toDoListEntity.setName(toDoListDto.getName());

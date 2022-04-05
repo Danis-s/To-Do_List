@@ -3,7 +3,7 @@ package com.example.demo.Dto;
 public class TaskDto {
     private long id;
     private String title;
-    private String desciption;
+    private String description;
 
     public long getId() {
         return id;
@@ -20,11 +20,11 @@ public class TaskDto {
         this.title = title;
     }
 
-    public String getDesciption() {
-        return desciption;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesciption(String desciption) {
-        this.desciption = desciption;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
