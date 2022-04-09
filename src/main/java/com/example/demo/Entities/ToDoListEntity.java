@@ -11,12 +11,11 @@ public class ToDoListEntity {
     private Long id;
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "task_entity_id")
-    private TaskEntity taskEntity;
+    @OneToMany
+    private List<TaskEntity> taskEntities;
 
-    public TaskEntity getTaskEntity() {
-        return taskEntity;
+    public List<TaskEntity> getTaskEntities() {
+        return taskEntities;
     }
 
     public Long getId() {
@@ -36,6 +35,6 @@ public class ToDoListEntity {
     }
 
     public void setTaskEntity(TaskEntity taskEntity) {
-        this.taskEntity = taskEntity;
+        taskEntities.add(taskEntity);
     }
 }

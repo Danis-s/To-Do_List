@@ -3,6 +3,7 @@ package com.example.demo.Entities;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class TaskEntity {
@@ -11,6 +12,9 @@ public class TaskEntity {
     private Long id;
     private String title;
     private String content;
+
+    @ManyToOne
+    private ToDoListEntity toDoListEntity;
 
     public Long getId() {
         return id;
