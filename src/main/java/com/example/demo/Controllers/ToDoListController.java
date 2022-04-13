@@ -33,6 +33,10 @@ public class ToDoListController {
     public ToDoListEntity addTask(@RequestBody TaskDto taskDto, @PathVariable long id){
         return listService.addTask(id, taskDto);
     }
+    @PostMapping("task/{id}")
+    public ToDoListEntity editTask(@PathVariable Long id){
+        return listService.updateTask(id);
+    }
 
     @PutMapping("/list/{id}")
     public ToDoListEntity editList(@RequestBody ToDoListDto toDoList, @PathVariable long id){
@@ -47,5 +51,10 @@ public class ToDoListController {
     @DeleteMapping("/list/{id}")
     public ToDoListEntity deleteList(@PathVariable long id){
         return listService.deleteList(id);
+    }
+
+    @DeleteMapping("task/{id}")
+    public ToDoListEntity deleteTask(@PathVariable Long id){
+        return listService.deleteTask(id);
     }
 }

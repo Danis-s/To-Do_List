@@ -3,6 +3,7 @@ package com.example.demo.Dto;
 public class TaskDto {
     private String title;
     private String content;
+    private boolean status;
 
     public String getTitle() {
         return title;
@@ -16,5 +17,13 @@ public class TaskDto {
     }
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }

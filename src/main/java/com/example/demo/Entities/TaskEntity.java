@@ -12,6 +12,7 @@ public class TaskEntity {
     private Long id;
     private String title;
     private String content;
+    private boolean status;
 
     @ManyToOne
     private ToDoListEntity toDoListEntity;
@@ -34,5 +35,13 @@ public class TaskEntity {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }

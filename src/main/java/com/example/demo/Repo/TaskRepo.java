@@ -8,4 +8,7 @@ import org.springframework.stereotype.Repository;
 public interface TaskRepo extends CrudRepository<TaskEntity, Long> {
     @Override
     Iterable<TaskEntity> findAll();
+
+    @Override
+    Iterable<TaskEntity> findAllById(Iterable<Long> id);
 }
