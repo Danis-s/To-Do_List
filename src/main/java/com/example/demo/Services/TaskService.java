@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 import com.example.demo.Dto.TaskDto;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class TaskService {
