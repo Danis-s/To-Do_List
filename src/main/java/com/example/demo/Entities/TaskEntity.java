@@ -12,6 +12,15 @@ public class TaskEntity {
     private Long id;
     private String title;
     private String content;
+    private Long list_id;
+
+    public Long getList_id() {
+        return list_id;
+    }
+
+    public void setList_id(Long list_id) {
+        this.list_id = list_id;
+    }
 
     @ManyToOne
     private ToDoListEntity toDoListEntity;

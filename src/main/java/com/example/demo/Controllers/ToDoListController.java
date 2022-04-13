@@ -2,7 +2,9 @@ package com.example.demo.Controllers;
 
 import com.example.demo.Dto.TaskDto;
 import com.example.demo.Dto.ToDoListDto;
+import com.example.demo.Entities.TaskEntity;
 import com.example.demo.Entities.ToDoListEntity;
+import com.example.demo.Services.TaskService;
 import com.example.demo.Services.ToDoListService;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,9 +13,11 @@ import java.util.List;
 @RestController
 public class ToDoListController {
     public final ToDoListService listService;
+    public final TaskService taskService;
 
-    public ToDoListController(ToDoListService listService) {
+    public ToDoListController(ToDoListService listService, TaskService taskService) {
         this.listService = listService;
+        this.taskService = taskService;
     }
 
     @GetMapping("/list")
@@ -24,7 +28,10 @@ public class ToDoListController {
     public ToDoListEntity getListById(@PathVariable long id){
         return listService.getList(id);
     }
-
+    @GetMapping("/list/{id}/task")
+    public TaskEntity getTasks(@PathVariable long id){
+        return taskService.getTasks(id);
+    }
     @PostMapping("/list")
     public long createList(@RequestBody ToDoListDto toDoListDto) {
         return listService.createList(toDoListDto);

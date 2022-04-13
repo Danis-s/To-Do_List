@@ -26,4 +26,9 @@ public class TaskService {
         this.taskRepo.save(taskEntity);
         return taskEntity.getId();
     }
+
+    public TaskEntity getTasks(long id) {
+        taskRepo.findAll();
+        return null;
+    }
 }

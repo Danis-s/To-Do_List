@@ -1,8 +1,14 @@
 package com.example.demo.Services;
 
+import com.example.demo.Dto.TaskDto;
+import com.example.demo.Dto.ToDoListDto;
+import com.example.demo.Dto.UserDto;
 import com.example.demo.Entities.RoleEntity;
+import com.example.demo.Entities.TaskEntity;
+import com.example.demo.Entities.ToDoListEntity;
 import com.example.demo.Entities.UserEntity;
 import com.example.demo.Repo.RoleRepo;
+import com.example.demo.Repo.ToDoListRepo;
 import com.example.demo.Repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,6 +29,8 @@ public class UserService implements UserDetailsService {
     private EntityManager em;
     @Autowired
     UserRepo userRepository;
+    @Autowired
+    ToDoListRepo toDoListRepo;
     @Autowired
     RoleRepo roleRepository;
     @Autowired
@@ -61,16 +69,37 @@ public class UserService implements UserDetailsService {
         return true;
     }
 
-    public boolean deleteUser(Long userId) {
+    public UserEntity deleteUser(Long userId) {
         if (userRepository.findById(userId).isPresent()) {
             userRepository.deleteById(userId);
-            return true;
+            return null;
         }
-        return false;
+        return null;
     }
 
     public List<UserEntity> usergtList(Long idMin) {
         return em.createQuery("SELECT u FROM UserEntity u WHERE u.id > :paramId", UserEntity.class)
                 .setParameter("paramId", idMin).getResultList();
+    }
+
+    public Long createUser(UserDto userDto){
+        UserEntity userEntity = new UserEntity();
+        userEntity.setUsername(userDto.getName());
+        this.userRepository.save(userEntity);
+        return userEntity.getId();
+    }
+
+    public Long createListForUser(long id, ToDoListDto toDoListDto){
+        UserEntity userEntity = userRepository.findById(id).get();
+        ToDoListEntity listEntity = new ToDoListEntity();
+        listEntity.setName(toDoListDto.getName());
+        toDoListRepo.save(listEntity);
+        userEntity.setToDoListEntities(listEntity);
+        this.userRepository.save(userEntity);
+        return null;
+    }
+
+    public UserEntity getUser(long id){
+        return userRepository.findById(id).get();
     }
 }

@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -21,6 +22,8 @@ public class UserEntity implements UserDetails {
     private String passwordConfirm;
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<RoleEntity> roles;
+    @OneToMany
+    private List<ToDoListEntity> toDoListEntities;
 
     public UserEntity() {
     }
@@ -90,5 +93,9 @@ public class UserEntity implements UserDetails {
 
     public void setRoles(Set<RoleEntity> roles) {
         this.roles = roles;
+    }
+
+    public void setToDoListEntities(ToDoListEntity toDoListEntity) {
+        toDoListEntities.add(toDoListEntity);
     }
 }
