@@ -13,6 +13,7 @@ public class TaskEntity {
     private String title;
     private String content;
     private Long list_id;
+    private boolean status;
 
     public Long getList_id() {
         return list_id;
@@ -43,5 +44,13 @@ public class TaskEntity {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }

@@ -12,7 +12,7 @@ import java.util.Set;
 @Entity
 public class UserEntity implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
     @Size(min = 2, message = "At least 5 characters")
     private String username;
@@ -43,7 +43,10 @@ public class UserEntity implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        if(password == null){
+            return "error";
+        }
+        return password;
     }
 
     @Override

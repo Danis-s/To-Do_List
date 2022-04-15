@@ -1,26 +1,16 @@
 package com.example.demo.Dto;
 
 public class TaskDto {
-    private Long id;
     private String title;
     private String content;
-    private Long list_id;
+    private boolean status;
 
-
-    public Long getId() {
-        return id;
+    public boolean isStatus() {
+        return status;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getList_id() {
-        return list_id;
-    }
-
-    public void setList_id(Long list_id) {
-        this.list_id = list_id;
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     public String getTitle() {

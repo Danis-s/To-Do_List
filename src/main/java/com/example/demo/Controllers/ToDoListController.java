@@ -41,6 +41,16 @@ public class ToDoListController {
         return listService.addTask(id, taskDto);
     }
 
+    @PostMapping("task/{id}")
+    public ToDoListEntity editTask(@PathVariable Long id){
+        return listService.updateTask(id);
+    }
+
+    @DeleteMapping("task/{id}")
+    public ToDoListEntity deleteTask(@PathVariable Long id){
+        return listService.deleteTask(id);
+    }
+
     @PutMapping("/list/{id}")
     public ToDoListEntity editList(@RequestBody ToDoListDto toDoList, @PathVariable long id){
         return listService.editList(toDoList, id);

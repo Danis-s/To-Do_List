@@ -60,9 +60,22 @@ public class ToDoListService {
         TaskEntity taskEntity = new TaskEntity();
         taskEntity.setTitle(taskDto.getTitle());
         taskEntity.setContent(taskDto.getContent());
+        taskEntity.setStatus(false);
         taskRepo.save(taskEntity);
         toDoListEntity.setTaskEntity(taskEntity);
         this.toDoListRepo.save(toDoListEntity);
+        return null;
+    }
+
+    public ToDoListEntity deleteTask(Long task_id){
+        taskRepo.deleteById(task_id);
+        return  null;
+    }
+
+    public ToDoListEntity updateTask(Long task_id){
+        TaskEntity taskEntity = taskRepo.findById(task_id).get();
+        taskEntity.setStatus(true);
+        taskRepo.save(taskEntity);
         return null;
     }
 }

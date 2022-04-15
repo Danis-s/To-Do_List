@@ -3,16 +3,13 @@ package com.example.demo.Controllers;
 import com.example.demo.Entities.UserEntity;
 import com.example.demo.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@Controller
+@RestController
 public class RegistrationController {
     @Autowired
     private UserService userService;
@@ -25,19 +22,18 @@ public class RegistrationController {
     }
 
     @PostMapping("/registration")
-    public String addUser(@ModelAttribute("userForm") @Valid UserEntity userForm, BindingResult bindingResult, Model model) {
+    public String addUser(@RequestBody UserEntity userEntity) {
+//        userService.saveUser(userEntity);
 
-        if (bindingResult.hasErrors()) {
-            return "registration";
-        }
-        if (!userForm.getPassword().equals(userForm.getPasswordConfirm())){
-            model.addAttribute("passwordError", "Passwords do not match");
-            return "registration";
-        }
-        if (!userService.saveUser(userForm)){
-            model.addAttribute("usernameError",  "User with the same name already exists");
-            return "registration";
-        }
+//        if (!userForm.getPassword().equals(userForm.getPasswordConfirm())){
+//            model.addAttribute("passwordError", "Passwords do not match");
+//            return "Passwords do not match";
+//        }
+//        if (!userService.saveUser(userForm)){
+//            model.addAttribute("usernameError",  "User with the same name already exists");
+//            return "User with the same name already exists";
+//        }
+
 
         return "redirect:/";
     }

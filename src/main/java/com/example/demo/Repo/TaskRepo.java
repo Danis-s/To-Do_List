@@ -12,5 +12,7 @@ public interface TaskRepo extends CrudRepository<TaskEntity, Long> {
     @Override
     Iterable<TaskEntity> findAll();
 
-    List<TaskDto> findByListId(Long id);
+    //List<TaskDto> findByListId(Long id);
+    @Override
+    Iterable<TaskEntity> findAllById(Iterable<Long> id);
 }
