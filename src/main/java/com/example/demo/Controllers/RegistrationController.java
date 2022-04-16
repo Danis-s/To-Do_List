@@ -23,7 +23,8 @@ public class RegistrationController {
 
     @PostMapping("/registration")
     public String addUser(@RequestBody UserEntity userEntity) {
-//        userService.saveUser(userEntity);
+        userService.saveUser(userEntity);
+
 
 //        if (!userForm.getPassword().equals(userForm.getPasswordConfirm())){
 //            model.addAttribute("passwordError", "Passwords do not match");
@@ -34,7 +35,7 @@ public class RegistrationController {
 //            return "User with the same name already exists";
 //        }
 
-
-        return "redirect:/";
+        return "OK";
+//        return "redirect:/";
     }
 }
