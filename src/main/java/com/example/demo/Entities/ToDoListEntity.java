@@ -14,6 +14,9 @@ public class ToDoListEntity {
     @OneToMany
     private List<TaskEntity> taskEntities;
 
+    @ManyToOne
+    private UserEntity userEntity;
+
     public List<TaskEntity> getTaskEntities() {
         return taskEntities;
     }

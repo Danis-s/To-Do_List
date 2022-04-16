@@ -11,6 +11,7 @@ import java.util.Set;
 
 @Entity
 public class UserEntity implements UserDetails {
+
     @Id
     @GeneratedValue
     private Long id;
@@ -20,10 +21,13 @@ public class UserEntity implements UserDetails {
     private String password;
     @Transient
     private String passwordConfirm;
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Set<RoleEntity> roles;
+
     @OneToMany
     private List<ToDoListEntity> toDoListEntities;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<RoleEntity> roles;
+
 
     public UserEntity() {
     }

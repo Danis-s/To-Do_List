@@ -13,7 +13,7 @@ public class TaskEntity {
     private String title;
     private String content;
     private Long list_id;
-    private boolean status;
+    private boolean status = false;
 
     public Long getList_id() {
         return list_id;
