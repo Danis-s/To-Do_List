@@ -53,6 +53,14 @@ public class UserEntity implements UserDetails {
         return password;
     }
 
+    public List<ToDoListEntity> getToDoListEntities() {
+        return toDoListEntities;
+    }
+
+    public void setToDoListEntities(List<ToDoListEntity> toDoListEntities) {
+        this.toDoListEntities = toDoListEntities;
+    }
+
     @Override
     public String getUsername() {
         return username;
@@ -102,7 +110,7 @@ public class UserEntity implements UserDetails {
         this.roles = roles;
     }
 
-    public void setToDoListEntities(ToDoListEntity toDoListEntity) {
-        toDoListEntities.add(toDoListEntity);
+    public void setToDoListEntities(ToDoListEntity toDoListEntities1) {
+        toDoListEntities.add(toDoListEntities1);
     }
 }

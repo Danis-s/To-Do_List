@@ -3,6 +3,7 @@ package com.example.demo.Entities;
 import com.example.demo.Dto.TaskDto;
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class ToDoListEntity {
@@ -10,6 +11,7 @@ public class ToDoListEntity {
     @GeneratedValue
     private Long id;
     private String name;
+
 
     @OneToMany
     private List<TaskEntity> taskEntities;

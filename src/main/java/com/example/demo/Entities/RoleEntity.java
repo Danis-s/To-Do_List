@@ -13,6 +13,7 @@ public class RoleEntity implements GrantedAuthority {
     @Id
     private Long id;
     private String name;
+
     @Transient
     @ManyToMany(mappedBy = "roles")
     private Set<UserEntity> users;

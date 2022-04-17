@@ -19,9 +19,11 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -65,7 +67,7 @@ public class UserService implements UserDetailsService {
 
         user.setRoles(Collections.singleton(new RoleEntity(1L, "ROLE_USER")));
         user.setPassword(bCPE.encode(user.getPassword()));
-
+        user.setToDoListEntities(user.getToDoListEntities());
         userRepository.save(user);
         return true;
     }
@@ -90,12 +92,13 @@ public class UserService implements UserDetailsService {
         return userEntity.getId();
     }
 
-    public Long createListForUser(long id, ToDoListDto toDoListDto){
+    @Transactional
+    public UserEntity addListForUser(Long id, ToDoListDto toDoListDto){
         UserEntity userEntity = userRepository.findById(id).get();
-        ToDoListEntity listEntity = new ToDoListEntity();
-        listEntity.setName(toDoListDto.getName());
-        toDoListRepo.save(listEntity);
-        userEntity.setToDoListEntities(listEntity);
+        ToDoListEntity toDoListEntity = new ToDoListEntity();
+        toDoListEntity.setName(toDoListDto.getName());
+        toDoListRepo.save(toDoListEntity);
+        userEntity.setToDoListEntities(toDoListEntity);
         this.userRepository.save(userEntity);
         return null;
     }
