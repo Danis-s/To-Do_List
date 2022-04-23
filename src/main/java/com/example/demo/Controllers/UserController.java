@@ -7,6 +7,9 @@ import com.example.demo.Services.ToDoListService;
 import com.example.demo.Services.UserService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
+import java.util.List;
+
 @RestController
 public class UserController {
     public final UserService userService;
@@ -28,8 +31,8 @@ public class UserController {
     }
 
     @GetMapping("/user/{id}")
-    public UserEntity getUserById(@PathVariable long id){
-        return userService.getUser(id);
+    public List<UserEntity> getUserById(@PathVariable long id){
+        return Collections.singletonList(userService.getUser(id));
     }
 
     @PostMapping("/user/{id}/list")
