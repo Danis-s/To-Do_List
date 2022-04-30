@@ -8,8 +8,11 @@ import com.example.demo.Entities.TaskEntity;
 import com.example.demo.Entities.ToDoListEntity;
 import com.example.demo.Entities.UserEntity;
 import com.example.demo.Repo.RoleRepo;
+import com.example.demo.Repo.TaskRepo;
 import com.example.demo.Repo.ToDoListRepo;
 import com.example.demo.Repo.UserRepo;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -23,7 +26,6 @@ import javax.transaction.Transactional;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -33,6 +35,8 @@ public class UserService implements UserDetailsService {
     UserRepo userRepository;
     @Autowired
     ToDoListRepo toDoListRepo;
+    @Autowired
+    TaskRepo taskRepo;
     @Autowired
     RoleRepo roleRepository;
     @Autowired
@@ -93,13 +97,24 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public UserEntity addListForUser(Long id, ToDoListDto toDoListDto){
+    public UserEntity addListToUser(Long id, ToDoListDto toDoListDto){
         UserEntity userEntity = userRepository.findById(id).get();
         ToDoListEntity toDoListEntity = new ToDoListEntity();
         toDoListEntity.setName(toDoListDto.getName());
         toDoListRepo.save(toDoListEntity);
         userEntity.setToDoListEntities(toDoListEntity);
         this.userRepository.save(userEntity);
+        return null;
+    }
+
+    @Transactional
+    public UserEntity deleteList(Long userId, Long listId) {
+        if (userRepository.findById(userId).isPresent()) {
+            if(toDoListRepo.findById(listId).isPresent()) {
+                toDoListRepo.deleteById(listId);
+            }
+            return null;
+        }
         return null;
     }
 

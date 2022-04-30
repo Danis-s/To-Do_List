@@ -1,10 +1,15 @@
 package com.example.demo.Controllers;
 
+import com.example.demo.Dto.TaskDto;
 import com.example.demo.Dto.ToDoListDto;
 import com.example.demo.Dto.UserDto;
+import com.example.demo.Entities.TaskEntity;
+import com.example.demo.Entities.ToDoListEntity;
 import com.example.demo.Entities.UserEntity;
+import com.example.demo.Services.TaskService;
 import com.example.demo.Services.ToDoListService;
 import com.example.demo.Services.UserService;
+import org.apache.catalina.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -16,10 +21,12 @@ import java.util.List;
 public class UserController {
     public final UserService userService;
     public final ToDoListService toDoListService;
+    public final TaskService taskService;
 
-    public UserController(UserService userService, ToDoListService toDoListService) {
+    public UserController(UserService userService, ToDoListService toDoListService, TaskService taskService) {
         this.userService = userService;
         this.toDoListService = toDoListService;
+        this.taskService = taskService;
     }
 
     @PostMapping("/user")
@@ -38,17 +45,14 @@ public class UserController {
     }
 
     @PostMapping("/user/{id}/list")
-    public UserEntity createListForUser(@RequestBody ToDoListDto toDoListDto,@PathVariable long id) {
-        return userService.addListForUser(id, toDoListDto);
+    public UserEntity createListToUser(@RequestBody ToDoListDto toDoListDto,@PathVariable long id) {
+        return userService.addListToUser(id, toDoListDto);
     }
 
-//    @PostMapping("/user/{id}")
-//    public long AddListToUser(@RequestBody ToDoListDto toDoListDto, @PathVariable long id) {
-//        return userService.addListToUser(id);
-//    }
+    @DeleteMapping("/user/{userid}/list/{listid}")
+    public UserEntity deleteListFromUser(@PathVariable long userid,@PathVariable long listid) {
+        return userService.deleteList(userid, listid);
+    }
 
-//    @GetMapping("/user")
-//    public List<ToDoListEntity> getLists(){
-//        return userService.usergtList();
-//    }
+
 }

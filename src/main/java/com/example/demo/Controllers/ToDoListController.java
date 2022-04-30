@@ -6,6 +6,8 @@ import com.example.demo.Entities.TaskEntity;
 import com.example.demo.Entities.ToDoListEntity;
 import com.example.demo.Services.TaskService;
 import com.example.demo.Services.ToDoListService;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,22 +32,20 @@ public class ToDoListController {
     public ToDoListEntity getListById(@PathVariable long id){
         return listService.getList(id);
     }
+
     @GetMapping("/list/{id}/task")
     public TaskEntity getTasks(@PathVariable long id){
         return taskService.getTasks(id);
     }
+
     @PostMapping("/list")
     public long createList(@RequestBody ToDoListDto toDoListDto) {
         return listService.createList(toDoListDto);
     }
+
     @PostMapping("/list/{id}/task")
     public ToDoListEntity addTask(@RequestBody TaskDto taskDto, @PathVariable long id){
         return listService.addTask(id, taskDto);
-    }
-
-    @PostMapping("/task/{id}")
-    public ToDoListEntity editTask(@PathVariable Long id){
-        return listService.updateTask(id);
     }
 
     @DeleteMapping("/task/{id}")
@@ -56,6 +56,11 @@ public class ToDoListController {
     @PutMapping("/list/{id}")
     public ToDoListEntity editList(@RequestBody ToDoListDto toDoList, @PathVariable long id){
         return listService.editList(toDoList, id);
+    }
+
+    @PutMapping("/task/{id}")
+    public ToDoListEntity editTask(@RequestBody TaskDto taskDto, @PathVariable long id) {
+        return listService.editTask( id, taskDto);
     }
 
     @DeleteMapping("/list")

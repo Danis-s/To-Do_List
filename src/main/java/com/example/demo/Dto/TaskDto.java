@@ -5,7 +5,7 @@ public class TaskDto {
     private String content;
     private boolean status;
 
-    public boolean isStatus() {
+    public boolean getStatus() {
         return status;
     }
 
@@ -26,4 +26,5 @@ public class TaskDto {
     public void setContent(String content) {
         this.content = content;
     }
+
 }

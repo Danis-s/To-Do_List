@@ -1,9 +1,6 @@
 package com.example.demo.Entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 public class TaskEntity {
@@ -12,16 +9,7 @@ public class TaskEntity {
     private Long id;
     private String title;
     private String content;
-    private Long list_id;
     private boolean status = false;
-
-    public Long getList_id() {
-        return list_id;
-    }
-
-    public void setList_id(Long list_id) {
-        this.list_id = list_id;
-    }
 
     @ManyToOne
     private ToDoListEntity toDoListEntity;
@@ -46,7 +34,7 @@ public class TaskEntity {
         this.content = content;
     }
 
-    public boolean isStatus() {
+    public boolean getStatus() {
         return status;
     }
 

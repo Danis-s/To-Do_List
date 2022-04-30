@@ -44,6 +44,17 @@ public class ToDoListService {
         return null;
     }
 
+
+    public ToDoListEntity editTask(Long id, TaskDto taskDto) {
+        TaskEntity taskEntity = taskRepo.findById(id).get();
+        taskEntity.setTitle(taskDto.getTitle());
+        taskEntity.setContent(taskDto.getContent());
+        taskEntity.setStatus(taskDto.getStatus());
+        this.taskRepo.save(taskEntity);
+        return null;
+    }
+
+
     public ToDoListEntity deleteList(long id) {
         toDoListRepo.deleteById(id);
         return null;
