@@ -48,9 +48,9 @@ public class ToDoListController {
         return listService.addTask(id, taskDto);
     }
 
-    @DeleteMapping("/task/{id}")
-    public ToDoListEntity deleteTask(@PathVariable Long id){
-        return listService.deleteTask(id);
+    @DeleteMapping("list/{listId}/task/{taskId}")
+    public ToDoListEntity deleteTask(@PathVariable Long listId, @PathVariable Long taskId){
+        return listService.deleteTask(listId, taskId);
     }
 
     @PutMapping("/list/{id}")

@@ -21,10 +21,8 @@ public class UserEntity implements UserDetails {
     private String password;
     @Transient
     private String passwordConfirm;
-
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<ToDoListEntity> toDoListEntities;
-
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<RoleEntity> roles;
 
@@ -112,5 +110,13 @@ public class UserEntity implements UserDetails {
 
     public void setToDoListEntities(ToDoListEntity toDoListEntities1) {
         toDoListEntities.add(toDoListEntities1);
+    }
+
+    public void deleteFromToDoListEntities(long id) {
+        for(int i = 0; i < toDoListEntities.size(); i++){
+            if(toDoListEntities.get(i).getId() == id){
+                toDoListEntities.remove(i);
+            }
+        }
     }
 }

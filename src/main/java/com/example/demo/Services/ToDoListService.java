@@ -78,8 +78,11 @@ public class ToDoListService {
         return null;
     }
 
-    public ToDoListEntity deleteTask(Long task_id){
-        taskRepo.deleteById(task_id);
+    public ToDoListEntity deleteTask(Long list_id, Long task_id){
+        ToDoListEntity toDoListEntity = toDoListRepo.findById(list_id).get();
+        toDoListEntity.deleteTask(task_id);
+        toDoListRepo.save(toDoListEntity);
+        //taskRepo.deleteById(task_id);
         return  null;
     }
 

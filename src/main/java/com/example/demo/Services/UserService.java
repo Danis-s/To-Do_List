@@ -108,10 +108,12 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public UserEntity deleteList(Long userId, Long listId) {
+    public UserEntity deleteList(long userId, long listId) {
         if (userRepository.findById(userId).isPresent()) {
             if(toDoListRepo.findById(listId).isPresent()) {
-                toDoListRepo.deleteById(listId);
+                UserEntity userEntity = userRepository.findById(userId).get();
+                userEntity.deleteFromToDoListEntities(listId);
+                this.userRepository.save(userEntity);
             }
             return null;
         }

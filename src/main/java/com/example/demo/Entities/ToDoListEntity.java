@@ -42,4 +42,12 @@ public class ToDoListEntity {
     public void setTaskEntity(TaskEntity taskEntity) {
         taskEntities.add(taskEntity);
     }
+
+    public void deleteTask(Long taskId){
+        for(int i = 0; i < taskEntities.size(); i++){
+            if(taskEntities.get(i).getId().equals(taskId)){
+                taskEntities.remove(i);
+            }
+        }
+    }
 }
