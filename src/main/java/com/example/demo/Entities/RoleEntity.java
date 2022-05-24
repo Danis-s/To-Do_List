@@ -1,34 +1,19 @@
 package com.example.demo.Entities;
 
-import org.springframework.security.core.GrantedAuthority;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Transient;
-import java.util.Set;
 
-@Entity
-public class RoleEntity implements GrantedAuthority {
+@Entity(name = "roles")
+public class RoleEntity {
     @Id
+    @GeneratedValue
+    @Column(name = "id", nullable = false)
     private Long id;
-    private String name;
 
-    @Transient
-    @ManyToMany(mappedBy = "roles")
-    private Set<UserEntity> users;
-
-    public RoleEntity() {
-    }
-
-    public RoleEntity(Long id) {
-        this.id = id;
-    }
-
-    public RoleEntity(Long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
+    @Column(name = "role_name")
+    private String roleName;
 
     public Long getId() {
         return id;
@@ -38,24 +23,11 @@ public class RoleEntity implements GrantedAuthority {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Set<UserEntity> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<UserEntity> users) {
-        this.users = users;
-    }
-
-    @Override
-    public String getAuthority() {
-        return null;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 }

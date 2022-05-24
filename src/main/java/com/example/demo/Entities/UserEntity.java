@@ -1,36 +1,27 @@
 package com.example.demo.Entities;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
-import javax.validation.constraints.Size;
-import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-@Entity
-public class UserEntity implements UserDetails {
-
-    @Id
-    @GeneratedValue
-    private Long id;
-    @Size(min = 2, message = "At least 5 characters")
-    private String username;
-    @Size(min = 2, message = "At least 5 characters")
-    private String password;
-    @Transient
-    private String passwordConfirm;
+@Entity(name = "users")
+public class UserEntity {
 
     @OneToMany
     private List<ToDoListEntity> toDoListEntities;
+    @Id
+    @GeneratedValue
+    @Column(name = "id", nullable = false)
+    private Long id;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Set<RoleEntity> roles;
+    @Column(name = "user_name")
+    private String username;
 
+    @Column(name = "password_hash")
+    private String passwordHash;
 
-    public UserEntity() {
-    }
+    @ManyToMany
+    private Set<RoleEntity> roles = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -40,66 +31,20 @@ public class UserEntity implements UserDetails {
         this.id = id;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
-
-    @Override
-    public String getPassword() {
-        if(password == null){
-            return "error";
-        }
-        return password;
-    }
-
-    public List<ToDoListEntity> getToDoListEntities() {
-        return toDoListEntities;
-    }
-
-    public void setToDoListEntities(List<ToDoListEntity> toDoListEntities) {
-        this.toDoListEntities = toDoListEntities;
-    }
-
-    @Override
     public String getUsername() {
         return username;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
     }
 
     public void setUsername(String username) {
         this.username = username;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public String getPasswordHash() {
+        return passwordHash;
     }
 
-    public String getPasswordConfirm() {
-        return passwordConfirm;
-    }
-
-    public void setPasswordConfirm(String passwordConfirm) {
-        this.passwordConfirm = passwordConfirm;
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 
     public Set<RoleEntity> getRoles() {
@@ -110,7 +55,13 @@ public class UserEntity implements UserDetails {
         this.roles = roles;
     }
 
-    public void setToDoListEntities(ToDoListEntity toDoListEntities1) {
-        toDoListEntities.add(toDoListEntities1);
+    public List<ToDoListEntity> getToDoListEntities() {
+        return toDoListEntities;
     }
+
+    public void setToDoListEntities(List<ToDoListEntity> toDoListEntities) {
+        this.toDoListEntities = toDoListEntities;
+    }
+
+
 }
