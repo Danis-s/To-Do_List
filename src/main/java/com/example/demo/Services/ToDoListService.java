@@ -44,6 +44,17 @@ public class ToDoListService {
         return null;
     }
 
+
+    public ToDoListEntity editTask(Long id, TaskDto taskDto) {
+        TaskEntity taskEntity = taskRepo.findById(id).get();
+        taskEntity.setTitle(taskDto.getTitle());
+        taskEntity.setContent(taskDto.getContent());
+        taskEntity.setStatus(taskDto.getStatus());
+        this.taskRepo.save(taskEntity);
+        return null;
+    }
+
+
     public ToDoListEntity deleteList(long id) {
         toDoListRepo.deleteById(id);
         return null;
@@ -60,9 +71,25 @@ public class ToDoListService {
         TaskEntity taskEntity = new TaskEntity();
         taskEntity.setTitle(taskDto.getTitle());
         taskEntity.setContent(taskDto.getContent());
+        taskEntity.setStatus(false);
         taskRepo.save(taskEntity);
         toDoListEntity.setTaskEntity(taskEntity);
         this.toDoListRepo.save(toDoListEntity);
+        return null;
+    }
+
+    public ToDoListEntity deleteTask(Long list_id, Long task_id){
+        ToDoListEntity toDoListEntity = toDoListRepo.findById(list_id).get();
+        toDoListEntity.deleteTask(task_id);
+        toDoListRepo.save(toDoListEntity);
+        //taskRepo.deleteById(task_id);
+        return  null;
+    }
+
+    public ToDoListEntity updateTask(Long task_id){
+        TaskEntity taskEntity = taskRepo.findById(task_id).get();
+        taskEntity.setStatus(true);
+        taskRepo.save(taskEntity);
         return null;
     }
 }

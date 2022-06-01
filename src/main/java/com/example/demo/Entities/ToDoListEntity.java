@@ -1,8 +1,10 @@
 package com.example.demo.Entities;
 
 import com.example.demo.Dto.TaskDto;
+
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class ToDoListEntity {
@@ -11,12 +13,14 @@ public class ToDoListEntity {
     private Long id;
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "task_entity_id")
-    private TaskEntity taskEntity;
+    @OneToMany
+    private List<TaskEntity> taskEntities;
 
-    public TaskEntity getTaskEntity() {
-        return taskEntity;
+    @ManyToOne
+    private UserEntity userEntity;
+
+    public List<TaskEntity> getTaskEntities() {
+        return taskEntities;
     }
 
     public Long getId() {
@@ -36,6 +40,14 @@ public class ToDoListEntity {
     }
 
     public void setTaskEntity(TaskEntity taskEntity) {
-        this.taskEntity = taskEntity;
+        taskEntities.add(taskEntity);
+    }
+
+    public void deleteTask(Long taskId){
+        for(int i = 0; i < taskEntities.size(); i++){
+            if(taskEntities.get(i).getId().equals(taskId)){
+                taskEntities.remove(i);
+            }
+        }
     }
 }

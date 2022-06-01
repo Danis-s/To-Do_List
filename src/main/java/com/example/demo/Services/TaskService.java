@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 import com.example.demo.Dto.TaskDto;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class TaskService {
@@ -27,5 +25,10 @@ public class TaskService {
         taskEntity.setContent(taskDto.getContent());
         this.taskRepo.save(taskEntity);
         return taskEntity.getId();
+    }
+
+    public TaskEntity getTasks(long id) {
+        taskRepo.findAll();
+        return null;
     }
 }

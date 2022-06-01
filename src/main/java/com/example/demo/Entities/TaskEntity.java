@@ -1,8 +1,6 @@
 package com.example.demo.Entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class TaskEntity {
@@ -11,6 +9,10 @@ public class TaskEntity {
     private Long id;
     private String title;
     private String content;
+    private boolean status = false;
+
+    @ManyToOne
+    private ToDoListEntity toDoListEntity;
 
     public Long getId() {
         return id;
@@ -30,5 +32,13 @@ public class TaskEntity {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }
