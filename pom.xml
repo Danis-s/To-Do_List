@@ -201,6 +201,30 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.40.1</version>
+				<configuration>
+					<images>
+						<image>
+							<name>mzv-isd/isd-3/${project.artifactId}:latest</name>
+							<alias>mzv-isd/isd-3/${project.artifactId}</alias>
+						</image>
+					</images>
+					<verbose>build</verbose>
+					<buildArgs></buildArgs>
+				</configuration>
+				<executions>
+					<execution>
+						<id>default</id>
+						<phase>package</phase>
+						<goals>
+							<goal>build</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 		<finalName>${project.name}</finalName>
 	</build>
