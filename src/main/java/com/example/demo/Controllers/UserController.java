@@ -3,6 +3,7 @@ package com.example.demo.Controllers;
 import com.example.demo.Dto.TaskDto;
 import com.example.demo.Dto.ToDoListDto;
 import com.example.demo.Dto.UserDto;
+import com.example.demo.Dto.UserInputDto;
 import com.example.demo.Entities.TaskEntity;
 import com.example.demo.Entities.ToDoListEntity;
 import com.example.demo.Entities.UserEntity;
@@ -10,6 +11,8 @@ import com.example.demo.Services.TaskService;
 import com.example.demo.Services.ToDoListService;
 import com.example.demo.Services.UserService;
 import org.apache.catalina.User;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -30,8 +33,8 @@ public class UserController {
     }
 
     @PostMapping("/user")
-    public long createUser(@RequestBody UserDto userDto) {
-        return userService.createUser(userDto);
+    public ResponseEntity<UserDto> createUser(@RequestBody UserInputDto userInputDto){
+        return new ResponseEntity<>(userService.createUser(userInputDto), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/user/{id}")
@@ -42,6 +45,10 @@ public class UserController {
     @GetMapping("/user/{id}")
     public List<UserEntity> getUserById(@PathVariable long id){
         return Collections.singletonList(userService.getUser(id));
+    }
+    @GetMapping("/user")
+    public List<UserEntity> getAllUsers() {
+        return userService.getAllUsers();
     }
 
     @PostMapping("/user/{id}/list")

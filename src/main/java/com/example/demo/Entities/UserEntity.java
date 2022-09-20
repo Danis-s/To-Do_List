@@ -16,10 +16,13 @@ public class UserEntity implements UserDetails {
     @GeneratedValue
     private Long id;
     @Size(min = 2, message = "At least 5 characters")
+    @Column(name = "username")
     private String username;
     @Size(min = 2, message = "At least 5 characters")
+    @Column(name = "password")
     private String password;
     @Transient
+    @Column(name = "passwordConfirm")
     private String passwordConfirm;
     @OneToMany(fetch = FetchType.EAGER)
     private List<ToDoListEntity> toDoListEntities;
@@ -118,5 +121,15 @@ public class UserEntity implements UserDetails {
                 toDoListEntities.remove(i);
             }
         }
+    }
+    public String toString() {
+        return
+                "User: "+ '\''
+                        + "name: "
+                        + username + ", "
+                        + "password:"
+                        + password + ", "
+                        + "confirmPassword"
+                        + passwordConfirm;
     }
 }

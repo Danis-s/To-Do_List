@@ -3,6 +3,7 @@ package com.example.demo.Services;
 import com.example.demo.Dto.TaskDto;
 import com.example.demo.Dto.ToDoListDto;
 import com.example.demo.Dto.UserDto;
+import com.example.demo.Dto.UserInputDto;
 import com.example.demo.Entities.RoleEntity;
 import com.example.demo.Entities.TaskEntity;
 import com.example.demo.Entities.ToDoListEntity;
@@ -11,14 +12,17 @@ import com.example.demo.Repo.RoleRepo;
 import com.example.demo.Repo.TaskRepo;
 import com.example.demo.Repo.ToDoListRepo;
 import com.example.demo.Repo.UserRepo;
+import com.example.demo.mappers.UserMapper;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -31,7 +35,7 @@ import java.util.Optional;
 public class UserService implements UserDetailsService {
     @PersistenceContext
     private EntityManager em;
-    @Autowired
+    //@Autowired
     UserRepo userRepository;
     @Autowired
     ToDoListRepo toDoListRepo;
@@ -41,6 +45,17 @@ public class UserService implements UserDetailsService {
     RoleRepo roleRepository;
     @Autowired
     BCryptPasswordEncoder bCPE;
+
+    private UserMapper userMapper;
+    @Autowired
+    public void setUserMapper (UserMapper userMapper){
+        this.userMapper = userMapper;
+    }
+
+    @Autowired
+    public void setUserRepository (UserRepo userRepository){
+        this.userRepository = userRepository;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -89,11 +104,16 @@ public class UserService implements UserDetailsService {
                 .setParameter("paramId", idMin).getResultList();
     }
 
-    public Long createUser(UserDto userDto){
-        UserEntity userEntity = new UserEntity();
-        userEntity.setUsername(userDto.getName());
-        this.userRepository.save(userEntity);
-        return userEntity.getId();
+//    public Long createUser(UserDto userDto){
+//        UserEntity userEntity = new UserEntity();
+//        userEntity.setUsername(userDto.getName());
+//        this.userRepository.save(userEntity);
+//        return userEntity.getId();
+//    }
+    public UserDto createUser (UserInputDto userInputDto) {
+        UserEntity userEntity = userMapper.mapToUserEntity(userInputDto);
+        userEntity = userRepository.save(userEntity);
+        return userMapper.mapToDTO(userEntity);
     }
 
     @Transactional
@@ -122,5 +142,10 @@ public class UserService implements UserDetailsService {
 
     public UserEntity getUser(long id){
         return userRepository.findById(id).get();
+    }
+
+
+    public List<UserEntity> getAllUsers () {
+        return userRepository.findAll();
     }
 }

@@ -17,6 +17,14 @@ services:
       - data:/var/lib/postgresql
       - logs:/var/log/postgresql
 
+  todo:
+    image: sandbox/todo-list/demo
+    environment:
+      DB_URL: jdbc:postgresql://library:5432/postgres
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+    ports:
+      - "8080:8080"
 volumes:
   data:
   logs:
